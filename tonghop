@@ -1,0 +1,507 @@
+/*int findMaxColumn(int arr[][1000], int row, int col) {
+    int arr1[col];
+    for(int i = 0; i < col; i++)
+    {
+        arr1[i]= 0;
+    }
+    for(int i = 0; i < row; i++)
+    {
+        for(int j = 0; j < col; j++)
+        {
+            arr1[j] += arr[i][j];
+        }
+    }
+    int a = arr1[0];
+    int m = 0;
+    for(int i = 1; i < col; i++)
+    {
+        if(a < arr1[i])
+        {
+            m = i; 
+            a = arr1[i];
+        }
+    }
+    return m;
+}
+void findAllIndex(string s1, string s2){
+    int m = (int) s1.find(s2, 0);
+    cout << m;
+    while(s1.find(s2, ++m) != -1 && m < s1.size())
+    {
+        m = (int) s1.find(s2, m);
+        cout << " " << m;
+    }
+}
+void calSum(string fileName)   {
+    ifstream input(fileName);
+    string a;
+    int m = 0;
+    while(input >> a)
+    {
+        m += stoi(a);
+    }
+    cout << m;
+}
+void reverse(char str[]) {
+    int n = strlen(str);
+    char str1[n];
+    for(int i = 0; i < n; i++) str1[i] = str[n - i - 1];
+    for(int i = 0; i < n; i++) str[i] = str1[i];
+}
+void recover(char signal[]) {
+    int n = strlen(signal);
+    for(int i = 0; i < n; i++)
+    {
+        if(((int) signal[i] >= 65) && ((int) signal[i] <= 90)) {signal[i] += 32;}
+        else if(((int) signal[i] >= 97) && ((int) signal[i] <= 122)) {signal[i] -= 32;}
+    }
+}
+int find(char str[], char substr[]) {
+    for(int i = 0; i < strlen(str); i++)
+    {
+        if(substr[0] == str[i])
+        {
+            for(int j = i + 1, k = 1; j < strlen(str), k < strlen(substr); j++, k++)
+            {
+                if(str[j] != substr[k] || j == strlen(str)) break;
+                else if(k == strlen(substr) - 1) return i;
+            }
+            i++;
+        }
+    }
+    return - 1;
+
+}
+void printFirstRepeatedWord(char str[]) {
+    char* sub[strlen(str)];
+    char* subb = strtok(str, " ");
+    int dem = 0;
+    sub[dem] = subb;
+    while(subb != NULL)
+    {
+        dem++;
+        subb = strtok(NULL, " ");
+        sub[dem] = subb;
+    }
+    for(int i = 0; i < dem; i++)
+    {
+        for(int j = 0; j < i; j++)
+        {
+            if(!strcmp(sub[j], sub[i]))
+            {
+                cout << sub[i];
+                return;
+            }
+        }
+    }
+    cout << "No Repetition";
+}  
+void process(char str[], char outstr[]) {
+    for(int i = 0; i < strlen(str); i++)
+    {
+        if(str[i] != ' ')
+        {
+            outstr[strlen(outstr)] = str[i];
+        }
+        else if(i != 0 && str[i - 1] != ' ')
+        {
+            outstr[strlen(outstr)] = ' ';
+        }
+    }
+}
+void replaceString(string s, string s1, string s2){
+    string a = s;
+    int k = 0;
+    int m = 0;
+    while(a.find(s1) != string::npos )
+    {
+        k = a.find(s1) + m;
+        a.erase(k - m, s1.size());
+         m += s1.size();
+    }
+    if(k != 0) s.replace(k, s1.size(), s2);
+    cout << s;
+}
+void uppercase(string output)   {
+    ofstream oinput(output);
+    string a;
+    cin >> a;
+    for(int i = 0; i < a.size(); i++)
+    {
+        if(a[i] >= 97 && a[i] <= 122) a[i] -= 32;
+    }
+    oinput << a;
+}
+void process(string fileName)   {
+    ifstream input(fileName);
+    string a;
+    while(getline(input, a))
+    {
+        for(int i = 0; i < a.size(); i++)
+        {
+            
+        }
+    }
+}
+int length(char* text)
+{
+    int i = 0;
+    while(text[i] != '\0')
+    {
+        i++;
+    }
+    return i;
+}
+void encrypt(char* text, int shift) {
+    shift = (shift < 26) ? shift : shift%26;
+    for(int i = 0; i < length(text); i++)
+    {
+        if((((int) text[i] <= 'z' - shift)&&((int) text[i] >= 'a')) || (((int) text[i] <= 'Z' - shift)&&((int) text[i] >= 'A'))) text[i] += shift;
+        else text[i] = text[i] + shift - 26*(shift/26 + 1);
+    }
+}
+
+void decrypt(char* text, int shift) {
+    // Write your code 
+    for(int i = 0; i < length(text); i++)
+    {
+        if((((int) text[i] >= 'a' + shift)&&((int) text[i] <= 'z'))|| (((int) text[i] >= 'A' + shift)&&((int) text[i] <= 'Z' ))) text[i] -= shift;
+        else text[i] = text[i] - shift + 26*(shift/26 + 1);
+    }
+}
+bool isSpecialNumber(int n) {
+    if(n == 1) return false;
+    for(int i = 1; i <= n/2; i++)
+    {
+        if(n % i == 0 && i != 1)
+        {
+            return false;
+        }
+    }
+    int a = 0;
+        while(n != 0)
+        {
+            int u = n %10;
+            a += u;
+            n /= 10;
+        }
+    for(int i = 1; i <= a/2; i++)
+    {
+        if(a % i == 0 && i != 1 ) return false;
+    }
+    return true;
+}
+int length(const char* str)
+{
+    int i = 0;
+    while(str[i] != '\0')
+    {
+        i++;
+    }
+    return i;
+}
+bool isPalindrome(const char* str) {
+    for(int i = 0; i <= length(str)/2; i++)
+    {
+        if(str[i] != str[length(str)-i - 1]) return false;
+    }
+    return true;
+}*/
+/**/
+int longestNonRepeatSubString(string s)
+{
+    int num = 1;
+    string str;
+    for(int i = 0; i < s.size(); i++)
+    {
+        int num1 = 0;
+        bool a = true;
+        for(int j = 0; j < str.size(); j++)
+        {
+            if(s[i] == str[j]) a = false;
+        }
+        if(a)
+        {
+            str += s[i];
+            num1 = str.size();
+        }
+        if(num1 > num) num = num1;
+    }
+    return num;
+}
+void studentGrading(string fileName)   {
+    int a = 0, b = 0, c = 0, d = 0;
+    ifstream input(fileName);
+    int n;
+    input >> n;
+    float arr[n][4];
+    for(int i = 0; i < n; i++)
+    {
+        bool five = true;
+        float diem = 0;
+        for(int j = 0; j < 4; j++)
+        {
+            input >> arr[i][j];
+            diem += arr[i][j];
+            if(arr[i][j] < 5) five = false;
+        }
+        if(diem/4 >= 8 && five) a++;
+        else if(diem/4 < 8 && diem/4 >= 6.5 && five) b++;
+        else if(diem/4 < 6.5 && diem/4 >= 5 && five) c++;
+        else d++;
+    }
+    cout << "A " << a << endl;
+    cout << "B " << b << endl;
+    cout << "C " << c << endl;
+    cout << "D " << d;
+}
+
+int convertToBase2(int n)
+{
+    if(n == 1 || n == 0) return n;
+    return n%2 + 10*convertToBase2(n/2);
+}
+
+int convertToBaseM(int n, int m = 2) {
+    long long a = convertToBase2(n);
+    int s = 0;
+    if(m == 8)
+    {
+        int l = 0;
+        int i = 1;
+        while(a != 0)
+        {
+            int  k = 0;
+            l = a % 1000;
+            k += 1*((l%100)%10) + 2*((l%100)/10) + 4*(l/100);
+            s += i*k;
+            i *= 10;
+            a /= 1000;
+        }
+        return s;
+    }
+    if(m == 4)
+    {
+        int l = 0;
+        int i = 1;
+        while(a!= 0)
+        {
+            int  k = 0;
+            l = a % 100;
+            k += 1*(l%10) + 2*(l/10);
+            s += i*k;
+            i*= 10;
+            a /= 100;
+        }
+        return s;
+    }
+    return a;
+}
+int length(char* str)
+{
+    int i = 0;
+    while(str[i] != '\0')
+    {
+        i++;
+    }
+    return i;
+}
+
+void mostFrequentCharacter(char* str, char& res, int& freq) {
+    freq = 0;
+    for(int i = 0; i < length(str); i++)
+    {
+        int num = 1;
+        for(int j = 0; j < length(str); j++)
+        {
+            if((str[i] == str[j] || str[i] == str[j] - 32 || str[i] == str[j] + 32 ) && i != j) num++;
+        }
+        if(num > freq || (num == freq && str[i] < res)) 
+        {
+            freq = num;
+            res = str[i];
+        }
+    }
+    if(res >= 65 && res <= 90) res += 32;
+}
+void calMoney(string price, string buy) {
+    ifstream input1(price);
+    int nproduct;
+    input1 >> nproduct;
+    int product[nproduct];
+    int product1[nproduct];
+    for(int i = 0; i < nproduct; i++)
+    {
+        input1 >> product[i];
+        input1 >> product1[i];
+    }
+    input1.close();
+    ifstream input2(buy);
+    int nbuy;
+    input2 >> nbuy;
+    string namebuy[nbuy];
+    int moneybuy[nbuy] = {};
+    string a;
+    int i = 0;
+    getline(input2, a);
+    while(getline(input2, a))
+    {
+        cout << a << "lll";
+        int nn = 0;
+        for(char ch : a)
+        {
+            if(ch == ' ') nn++;
+        }
+        namebuy[i] = a[0];
+        a.erase(0, 2);
+        for(int j = 0; j < nn/2; j++)
+        {
+            int m = a[0] - '0';
+            if(a.find(" ") != 1) 
+            {
+                for(int i = 1; i < a.find(" "); i++)
+                {
+                    m = m*10 + a[i] - '0';
+                }
+            }
+            a.erase(0, a.find(" ") + 1);
+            int n = a[0] - '0';
+            if((a.find(" ") != 1 && a.find(" ") != string::npos) || (a.find(' ') == string::npos && a[1] != '\r')) 
+            {
+                for(int i = 1; i < a.find(" ") && a[i] != '\r' && i < a.size(); i++)
+                {
+                    n = n*10 + a[i] - '0';
+                }
+            }
+            if (j != nn/2 - 1) a.erase(0, a.find(" ") + 1);
+            moneybuy[i] += product1[m - 1] * n;
+        }
+        i++;
+        if (i == nbuy) break;
+    }
+    for(int i = 0; i < nbuy; i++)
+    {
+        cout << namebuy[i] << " " << moneybuy[i] << endl;
+    }
+}
+int gcdRecursion(int p, int q)
+{
+    // BEGIN YOUR IMPLEMENTATION [1]
+    if(p % q == 0) return q;
+    if(q % p == 0) return p;
+    if(q > p) return gcdRecursion(p, q%p);
+    return gcdRecursion(q, p%q);
+    // END YOUR IMPLEMENTATION [1]
+}
+int gcdIteration(int p, int q)
+{
+    // BEGIN YOUR IMPLEMENTATION [2]
+    bool a = true;
+    int i = 0;
+    while(a)
+    {
+        if(p % q == 0)
+        {
+            i = q;
+            a = false;
+        }
+        if(q % p == 0)
+        {
+            i = p;
+            a = false;
+        }
+        q = (q < p) ? q : (q % p);
+        p = (p < q) ? p : (p % q);
+    }
+    return i;
+    // END YOUR IMPLEMENTATION [2]
+}
+int countWaySumOfSquare(int x, int i = 1)
+{
+    if (x < 1) {
+        return 0;
+    } else if (x == i*i) {
+        return 1;
+    } else if (i > sqrt(x)) {
+        return 0;
+    } else {
+        int count = 0;
+        int square = i * i;
+        count = countWaySumOfSquare(x - square, i + 1);
+        // if (square == x) {
+        //     count += 1;
+        // }
+        count += countWaySumOfSquare(x, i + 1);
+        return count;
+    }
+}
+
+bool palindromeRecursion(string s)
+{
+    if(s.size() == 1 || s.size() == 0) return true;
+    return s[0] == s[s.size() - 1] && palindromeRecursion(s.substr(1, s.size() - 2));
+}
+int calcSum(int *ptr, int n)
+{
+    if(n == 0) return 0;
+    return *ptr + calcSum(ptr + 1, n - 1);
+}
+char* concatStr(char* str1, char* str2) {
+    char* arr = new char[strlen(str1) + strlen(str2)];
+    for(int i = 0; i < strlen(str1) + strlen(str2); i++)
+    {
+        if(i < strlen(str1)) arr[i] = str1[i];
+        else arr[i] = str2[i - strlen(str1)];
+    }
+    // for(int i = strlen(str1); i < strlen(str1) + strlen(str2); i++) 
+    // {
+    //     arr[i] = str2[i - strlen(str1)];
+    // }
+    return arr;
+}
+int arr()
+{
+    return 1 == 1 + 1 == 1;
+}
+void reverse(int *ptr, int n)
+{
+    int* ptr1 = new int[n];
+    for(int i = 0; i < n; i++) *(ptr1 + i) = *(ptr + n - i - 1);
+    for(int i = 0; i < n; i++) *(ptr + i) = *(ptr1 + i);
+    delete ptr1;
+}
+int countWaySumOfSquare(int x) {
+    int num = 0;
+    
+}
+float foo(float x, int y)
+{
+    if(!y) return x;
+    return foo(x / (y | 1), y/2);
+}
+class C01
+{
+    int a;
+    public:
+    C01(): a(rand()) {}
+    int& foo() {return a; }
+};
+void process(const char *name, char *outstr) {
+    int j = 0;
+    for(int i = 0; name[i] != '\0'; i++)
+    {
+        if(isalpha(name[i]))
+        {
+            if(j == 0 || outstr[j - 1] == ' ') outstr[j] = toupper(name[i]);
+            else outstr[j] = tolower(name[i]);
+            j++;
+            if((i != strlen(name) - 1) && !isalpha(name[i + 1]))
+            {
+                outstr[j] = ' ';
+                i++;
+                j++;
+            }
+        }
+    }
+    outstr[j] = '\0';
+}
