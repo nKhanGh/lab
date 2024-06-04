@@ -1,0 +1,41 @@
+int convertToBase2(int n)
+{
+    if(n == 1 || n == 0) return n;
+    return n%2 + 10*convertToBase2(n/2);
+}
+
+int convertToBaseM(int n, int m = 2) {
+    long long a = convertToBase2(n);
+    int s = 0;
+    if(m == 8)
+    {
+        int l = 0;
+        int i = 1;
+        while(a != 0)
+        {
+            int  k = 0;
+            l = a % 1000;
+            k += 1*((l%100)%10) + 2*((l%100)/10) + 4*(l/100);
+            s += i*k;
+            i *= 10;
+            a /= 1000;
+        }
+        return s;
+    }
+    if(m == 4)
+    {
+        int l = 0;
+        int i = 1;
+        while(a!= 0)
+        {
+            int  k = 0;
+            l = a % 100;
+            k += 1*(l%10) + 2*(l/10);
+            s += i*k;
+            i*= 10;
+            a /= 100;
+        }
+        return s;
+    }
+    return a;
+}
