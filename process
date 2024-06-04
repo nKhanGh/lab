@@ -1,0 +1,19 @@
+void process(const char *name, char *outstr) {
+    int j = 0;
+    for(int i = 0; name[i] != '\0'; i++)
+    {
+        if(isalpha(name[i]))
+        {
+            if(j == 0 || outstr[j - 1] == ' ') outstr[j] = toupper(name[i]);
+            else outstr[j] = tolower(name[i]);
+            j++;
+            if((i != strlen(name) - 1) && !isalpha(name[i + 1]))
+            {
+                outstr[j] = ' ';
+                i++;
+                j++;
+            }
+        }
+    }
+    outstr[j] = '\0';
+}
