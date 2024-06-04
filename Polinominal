@@ -1,0 +1,67 @@
+class Polynomial {
+private:
+    int* coeffs;
+    int size;
+
+public:
+    Polynomial() : coeffs(nullptr), size(0) {}
+
+    void setPolynomial(const int* coeffs, int size) {
+        this->size = size;
+        int* tmp = new int[size];
+        for(int i = 0; i < size; ++i)
+            tmp[i] = coeffs[i];
+        delete[] this->coeffs;
+        this->coeffs = tmp;
+    }
+    
+    Polynomial operator+(const Polynomial& other) const {
+        Polynomial tmp;
+        tmp.size = (size > other.size) ? size : other.size;
+        tmp.coeffs = new int [tmp.size];
+        for(int i = 0; i < tmp.size; ++i){
+            if(i > size) tmp.coeffs[i] = other.coeffs[i];
+            if(i > other.size) tmp.coeffs[i] = this->coeffs[i];
+            else tmp.coeffs[i] = this->coeffs[i] + other.coeffs[i];
+        }
+        return tmp;
+    }
+    
+    Polynomial operator-(const Polynomial& other) const {
+        Polynomial tmp;
+        tmp.size = (size > other.size) ? size : other.size;
+        tmp.coeffs = new int [tmp.size];
+        for(int i = 0; i < tmp.size; ++i){
+            if(i > size) tmp.coeffs[i] = -other.coeffs[i];
+            if(i > other.size) tmp.coeffs[i] = this->coeffs[i];
+            else tmp.coeffs[i] = this->coeffs[i] - other.coeffs[i];
+        }
+        return tmp;
+    }
+    
+    Polynomial operator*(const Polynomial& other) const {
+        Polynomial tmp;
+        tmp.size = size + other.size - 1;
+        tmp.coeffs = new int [tmp.size];
+        for(int i = 0; i < tmp.size; ++i) tmp.coeffs[i] = 0;
+        
+        for(int i = 0; i < size; ++i){
+            for(int j = 0; j < other.size; ++j){
+                tmp.coeffs[i + j] += this->coeffs[i] * other.coeffs[j];
+            }
+        }
+        return tmp;
+    }
+    
+    Polynomial derivative() const {
+        Polynomial tmp;
+        tmp.size = this->size - 1;
+        tmp.coeffs = new int[tmp.size];
+        for(int i = 0; i < tmp.size; ++i){
+            tmp.coeffs[i] = this->coeffs[i + 1] * (i + 1);
+        }
+        return tmp;
+    }
+    
+    void printPolynomial() const; // DO NOT TOUCH
+};
