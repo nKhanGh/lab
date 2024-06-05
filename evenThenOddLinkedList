@@ -1,0 +1,43 @@
+node* evenThenOddLinkedList(node *head)
+{
+    int i = 0;
+    node* a = head;
+    node* b = nullptr;
+    if(head->data % 2 == 0)
+    {
+        i++;
+        b = a;
+        a = a->next;
+    }
+    while(a != nullptr)
+    {
+        if(a->data % 2 == 0)
+        {
+            b->next = a->next;
+            node* d = head;
+            node* c = a;
+            a = a->next;
+            if(i == 0)
+            {
+                c->next = d;
+                head = c;
+            }
+            else
+            {
+                for(int j = 0; j < i - 1; j++)
+                {
+                    d = d->next;
+                }
+                c->next = d->next;
+                d->next = c;
+            }
+            if (b->next != a) b = b->next;
+            i++;
+        }
+        else {
+            b = a;
+            a = a->next;
+        }
+    }
+    return head;
+}
